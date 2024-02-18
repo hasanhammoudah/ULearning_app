@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/app_bloc.dart';
 import 'package:ulearning_app/app_events.dart';
 import 'package:ulearning_app/app_states.dart';
+import 'package:ulearning_app/pages/sign_in/sign_in.dart';
 import 'package:ulearning_app/pages/welcome/bloc/welcome_bloc.dart';
 import 'package:ulearning_app/pages/welcome/welcome.dart';
 
@@ -31,10 +32,17 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
+            theme: ThemeData(
+              appBarTheme: const AppBarTheme(
+                elevation: 0,
+                backgroundColor: Colors.white,
+              ),
+            ),
             title: 'Flutter Demo',
-            home: Welcome(),
+            home: const Welcome(),
             routes: {
               MyHomePage.routeName: (context) => const MyHomePage(),
+              SignIn.routeName: (context) => const SignIn(),
             },
           );
         },
