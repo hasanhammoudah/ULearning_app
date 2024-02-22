@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/values/colors.dart';
 
-AppBar buildAppBar() {
+AppBar buildAppBar(String type) {
   return AppBar(
     bottom: PreferredSize(
       preferredSize: const Size.fromHeight(1.0),
@@ -12,7 +12,7 @@ AppBar buildAppBar() {
       ),
     ),
     title: Text(
-      'Log In',
+     type,
       style: TextStyle(
         color: AppColors.primaryText,
         fontSize: 16.sp,
@@ -104,7 +104,7 @@ Widget buildTextField(String hintText, String textType, String iconName,
           width: 270.w,
           height: 50.h,
           child: TextField(
-            onChanged: (value)=> func!(value),
+            onChanged: (value) => func!(value),
             keyboardType: TextInputType.multiline,
             decoration: InputDecoration(
               hintText: hintText,
@@ -170,7 +170,7 @@ Widget forgotPassword() {
 Widget buildLogInAndRegButton(
     String buttonName, String buttonType, void Function()? func) {
   return GestureDetector(
-    onTap:  func,
+    onTap: func,
     child: Container(
       width: 325.w,
       height: 50.h,
