@@ -1,7 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:ulearning_app/common/values/constants.dart';
 import 'package:ulearning_app/common/widgets/flutter_toast.dart';
+import 'package:ulearning_app/global.dart';
 import 'package:ulearning_app/pages/sign_in/bloc/sign_in_bloc.dart';
 
 class SignInController {
@@ -38,10 +40,12 @@ class SignInController {
           var user = credentail.user;
           if (user != null) {
             print('user exist');
+            Global.storageService
+                .setString(AppConstants.STORAGE_USER_TOKEN_KEY, '123456789');
             Navigator.pushNamedAndRemoveUntil(
                 context, '/application', (route) => false);
           } else {
-            print('no user');
+            toastInfo(msg: 'Currently you are not a user of this app');
           }
         } on FirebaseAuthException catch (e) {
           print(e.toString());

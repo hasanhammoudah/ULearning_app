@@ -1,20 +1,12 @@
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/routes/pages.dart';
 import 'package:ulearning_app/common/values/colors.dart';
+import 'package:ulearning_app/global.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    options: const FirebaseOptions(
-      apiKey: 'AIzaSyDV6jENlNzylFosbiIoKUnN2Hcu4vBJvkY',
-      appId: '1:800081806428:android:67404905833efbee865299',
-      messagingSenderId: 'fsdf',
-      projectId: 'ulearning-5e7cd',
-    ),
-  );
+  await Global.init();
   runApp(const MyApp());
 }
 
@@ -26,6 +18,7 @@ class MyApp extends StatelessWidget {
     return MultiBlocProvider(
       providers: [...AppPages.allBlocProviders(context)],
       child: ScreenUtilInit(
+        designSize: const Size(375, 812),
         builder: (context, child) {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
@@ -44,4 +37,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

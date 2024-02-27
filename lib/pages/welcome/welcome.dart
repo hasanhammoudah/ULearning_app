@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/values/colors.dart';
+import 'package:ulearning_app/common/values/constants.dart';
+import 'package:ulearning_app/global.dart';
 import 'package:ulearning_app/pages/welcome/bloc/welcome_bloc.dart';
 import 'package:ulearning_app/pages/welcome/bloc/welcome_event.dart';
 import 'package:ulearning_app/pages/welcome/bloc/welcome_state.dart';
@@ -74,7 +76,7 @@ class _WelcomeState extends State<Welcome> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       decorator: DotsDecorator(
                         color: AppColors.primaryThirdElementText,
-                        activeColor:AppColors.primaryElement,
+                        activeColor: AppColors.primaryElement,
                         size: const Size.square(
                           8.0,
                         ),
@@ -151,6 +153,9 @@ class _WelcomeState extends State<Welcome> {
             } else {
               // Navigator.push(context,
               //     MaterialPageRoute(builder: (context) => const MyHomePage()));
+              Global.storageService
+                  .setBool(AppConstants.STORAGE_DEVICE_OPEN_FIRST_TIME, true);
+            
               Navigator.pushNamedAndRemoveUntil(
                   context, '/signIn', (route) => false);
             }
