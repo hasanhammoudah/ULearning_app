@@ -10,7 +10,6 @@ import 'package:ulearning_app/pages/sign_in/sign_in_controller.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
-  static String routeName = "/signIn";
 
   @override
   State<SignIn> createState() => _SignInState();
@@ -76,7 +75,7 @@ class _SignInState extends State<SignIn> {
                             'Sign Up',
                             'register',
                             () {
-                              Navigator.pushNamed(context, Register.routeName);
+                              Navigator.pushNamed(context, '/register');
                             },
                           ),
                         ],

@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/values/colors.dart';
-import 'package:ulearning_app/main.dart';
-import 'package:ulearning_app/pages/sign_in/sign_in.dart';
 import 'package:ulearning_app/pages/welcome/bloc/welcome_bloc.dart';
 import 'package:ulearning_app/pages/welcome/bloc/welcome_event.dart';
 import 'package:ulearning_app/pages/welcome/bloc/welcome_state.dart';
@@ -154,7 +152,7 @@ class _WelcomeState extends State<Welcome> {
               // Navigator.push(context,
               //     MaterialPageRoute(builder: (context) => const MyHomePage()));
               Navigator.pushNamedAndRemoveUntil(
-                  context, SignIn.routeName, (route) => false);
+                  context, '/signIn', (route) => false);
             }
           },
           child: Container(

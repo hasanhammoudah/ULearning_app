@@ -38,6 +38,8 @@ class SignInController {
           var user = credentail.user;
           if (user != null) {
             print('user exist');
+            Navigator.pushNamedAndRemoveUntil(
+                context, '/application', (route) => false);
           } else {
             print('no user');
           }
