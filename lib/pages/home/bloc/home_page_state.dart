@@ -1,10 +1,12 @@
-part of 'home_page_bloc.dart';
+class HomePageState {
+  final int index;
+  const HomePageState({
+    this.index = 0,
+  });
 
-sealed class HomePageState extends Equatable {
-  const HomePageState();
-  
-  @override
-  List<Object> get props => [];
+  HomePageState copyWith({int? index}) {
+    return HomePageState(
+      index: index ?? this.index,
+    );
+  }
 }
-
-final class HomePageInitial extends HomePageState {}

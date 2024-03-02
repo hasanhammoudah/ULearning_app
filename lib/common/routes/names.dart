@@ -7,4 +7,7 @@ class AppRoutes {
   static const SIGN_IN = '/signIn';
   // register page
   static const REGISTER = '/register';
+
+  //navigation home page screen
+  static const HOME_PAGE = '/home_page';
 }
