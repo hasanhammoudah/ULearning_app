@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/values/colors.dart';
+import 'package:ulearning_app/common/widgets/base_text_widget.dart';
 import 'package:ulearning_app/pages/home/bloc/home_page_bloc.dart';
 import 'package:ulearning_app/pages/home/bloc/home_page_event.dart';
 import 'package:ulearning_app/pages/home/bloc/home_page_state.dart';
@@ -215,12 +216,12 @@ Widget menuView() {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            _reusableText(
+            reusableText(
               'Choose your course',
             ),
             GestureDetector(
               onTap: () {},
-              child: _reusableText(
+              child: reusableText(
                 'See all',
                 color: AppColors.primaryThirdElementText,
                 fontSize: 10,
@@ -255,22 +256,6 @@ Widget menuView() {
   );
 }
 
-Widget _reusableText(
-  String text, {
-  Color color = AppColors.primaryText,
-  int fontSize = 16,
-  FontWeight fontWeight = FontWeight.bold,
-}) {
-  return Text(
-    text,
-    style: TextStyle(
-      color: color,
-      fontWeight: fontWeight,
-      fontSize: fontSize.sp,
-    ),
-  );
-}
-
 Widget _reusableMenuText(
   String menuText, {
   Color textColor = AppColors.primaryElementText,
@@ -295,7 +280,7 @@ Widget _reusableMenuText(
         color: backgroundColor,
       ),
     ),
-    child: _reusableText(
+    child: reusableText(
       menuText,
       color: textColor,
       fontWeight: FontWeight.normal,

@@ -155,7 +155,7 @@ class _WelcomeState extends State<Welcome> {
               //     MaterialPageRoute(builder: (context) => const MyHomePage()));
               Global.storageService
                   .setBool(AppConstants.STORAGE_DEVICE_OPEN_FIRST_TIME, true);
-            
+
               Navigator.pushNamedAndRemoveUntil(
                   context, '/signIn', (route) => false);
             }

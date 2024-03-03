@@ -1,5 +1,3 @@
-
-
 class ContactResponseEntity {
   int? code;
   String? msg;
@@ -16,16 +14,17 @@ class ContactResponseEntity {
         msg: json["msg"],
         data: json["data"] == null
             ? []
-            : List<ContactItem>.from(json["data"].map((x) => ContactItem.fromJson(x))),
+            : List<ContactItem>.from(
+                json["data"].map((x) => ContactItem.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
-    "counts": code ,
-    "msg": msg ,
-    "data": data == null
-        ? []
-        : List<dynamic>.from(data!.map((x) => x.toJson())),
-  };
+        "counts": code,
+        "msg": msg,
+        "data": data == null
+            ? []
+            : List<dynamic>.from(data!.map((x) => x.toJson())),
+      };
 }
 
 // login result
@@ -44,8 +43,7 @@ class ContactItem {
     this.online,
   });
 
-  factory ContactItem.fromJson(Map<String, dynamic> json) =>
-      ContactItem(
+  factory ContactItem.fromJson(Map<String, dynamic> json) => ContactItem(
         token: json["token"],
         name: json["name"],
         description: json["description"],
@@ -54,13 +52,10 @@ class ContactItem {
       );
 
   Map<String, dynamic> toJson() => {
-    "token": token,
-    "name": name,
-    "description": description,
-    "avatar": avatar,
-    "online": online,
-  };
+        "token": token,
+        "name": name,
+        "description": description,
+        "avatar": avatar,
+        "online": online,
+      };
 }
-
-
-

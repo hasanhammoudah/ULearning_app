@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/pages/common_widgets.dart';
-import 'package:ulearning_app/pages/register/register.dart';
 import 'package:ulearning_app/pages/sign_in/bloc/sign_in_bloc.dart';
 import 'package:ulearning_app/pages/sign_in/bloc/sign_in_event.dart';
 import 'package:ulearning_app/pages/sign_in/bloc/sign_in_state.dart';

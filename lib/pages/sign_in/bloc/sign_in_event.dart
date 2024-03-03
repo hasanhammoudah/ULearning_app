@@ -1,5 +1,5 @@
 abstract class SignInEvent {
-   const SignInEvent();
+  const SignInEvent();
 }
 
 class EmailEvent extends SignInEvent {

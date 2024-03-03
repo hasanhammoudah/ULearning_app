@@ -12,7 +12,7 @@ AppBar buildAppBar(String type) {
       ),
     ),
     title: Text(
-     type,
+      type,
       style: TextStyle(
         color: AppColors.primaryText,
         fontSize: 16.sp,

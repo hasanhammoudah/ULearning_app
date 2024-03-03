@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning_app/common/routes/names.dart';
 import 'package:ulearning_app/common/values/colors.dart';
+import 'package:ulearning_app/common/widgets/base_text_widget.dart';
 
 AppBar buildAppbar() {
   return AppBar(
@@ -14,14 +16,7 @@ AppBar buildAppbar() {
             'assets/icons/menu.png',
           ),
         ),
-        Text(
-          'Profile',
-          style: TextStyle(
-            color: AppColors.primaryText,
-            fontWeight: FontWeight.bold,
-            fontSize: 16.sp,
-          ),
-        ),
+        reusableText('Profile'),
         SizedBox(
           width: 24.w,
           height: 24.h,
@@ -69,12 +64,14 @@ var imagesInfo = <String, String>{
   'Love': 'heart(1).png',
   'Reminders': 'cube.png',
 };
-Widget buildListView() {
+
+Widget buildListView(BuildContext context) {
   return Column(
     children: [
       ...List.generate(
         imagesInfo.length,
         (index) => GestureDetector(
+          onTap: () => Navigator.pushNamed(context, AppRoutes.SETTINGS),
           child: Container(
             margin: EdgeInsets.only(
               bottom: 15.h,

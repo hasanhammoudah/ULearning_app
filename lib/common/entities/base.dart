@@ -1,4 +1,3 @@
-
 class BaseResponseEntity {
   int? code;
   String? msg;
@@ -18,10 +17,10 @@ class BaseResponseEntity {
       );
 
   Map<String, dynamic> toJson() => {
-    "counts": code ,
-    "msg": msg ,
-    "items": data,
-  };
+        "counts": code,
+        "msg": msg,
+        "items": data,
+      };
 }
 
 class BindFcmTokenRequestEntity {
@@ -32,6 +31,6 @@ class BindFcmTokenRequestEntity {
   });
 
   Map<String, dynamic> toJson() => {
-    "fcmtoken": fcmtoken,
-  };
+        "fcmtoken": fcmtoken,
+      };
 }
