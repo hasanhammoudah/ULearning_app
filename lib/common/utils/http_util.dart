@@ -27,8 +27,8 @@ class HttpUtil {
       data: data,
       queryParameters: queryParameters,
     );
-    // print('my respons data is ${response.toString()}');
-    //     print('my status is ${response.statusCode.toString()}');
+    print('my respons data is ${response.toString()}');
+    print('my status is ${response.statusCode.toString()}');
 
     return response.data;
   }
