@@ -1,8 +1,8 @@
- import 'package:dio/dio.dart';
+import 'package:dio/dio.dart';
 import 'package:ulearning_app/common/values/constants.dart';
 
 class HttpUtil {
-  static HttpUtil _instance = HttpUtil._internal();
+  static final HttpUtil _instance = HttpUtil._internal();
   factory HttpUtil() {
     return _instance;
   }
@@ -27,8 +27,8 @@ class HttpUtil {
       data: data,
       queryParameters: queryParameters,
     );
-    print('my respons data is ${response.toString()}');
-        print('my status is ${response.statusCode.toString()}');
+    // print('my respons data is ${response.toString()}');
+    //     print('my status is ${response.statusCode.toString()}');
 
     return response.data;
   }
