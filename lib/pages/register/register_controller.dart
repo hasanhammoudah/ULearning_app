@@ -40,6 +40,8 @@ class RegisterController {
       if (credential.user != null) {
         await credential.user?.sendEmailVerification();
         await credential.user?.updateDisplayName(userName);
+        String photoUrl = "uploads/1.jpg";
+        await credential.user?.updatePhotoURL(photoUrl);
         toastInfo(
           msg:
               'An email has been sent to your registered email. To activate it please check your email box and click on the link',
