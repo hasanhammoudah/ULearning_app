@@ -5,6 +5,8 @@ import 'package:ulearning_app/common/values/constants.dart';
 import 'package:ulearning_app/global.dart';
 import 'package:ulearning_app/pages/application/bloc/application_bloc.dart';
 import 'package:ulearning_app/pages/application/bloc/application_event.dart';
+import 'package:ulearning_app/pages/home/bloc/home_page_bloc.dart';
+import 'package:ulearning_app/pages/home/bloc/home_page_event.dart';
 import 'package:ulearning_app/pages/profile/settings/bloc/settings_bloc.dart';
 import 'package:ulearning_app/pages/profile/settings/bloc/settings_state.dart';
 import 'package:ulearning_app/pages/profile/settings/widgets/settings_widgets.dart';
@@ -19,6 +21,9 @@ class _SettingsPageState extends State<SettingsPage> {
   void removeUserData() {
     context.read<ApplicationBloc>().add(
           const TriggerAppEvent(0),
+        );
+    context.read<HomePageBloc>().add(
+          const HomePageDots(0),
         );
     Global.storageService.remove(AppConstants.STORAGE_USER_TOKEN_KEY);
     Global.storageService.remove(AppConstants.STORAGE_USER_PROFILE_KEY);

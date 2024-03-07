@@ -48,7 +48,6 @@ class SignInController {
             String? email = user.email;
             String? id = user.uid;
             String? photoUrl = user.photoURL;
-            print('my url is ${photoUrl}');
             LoginRequestEntity loginRequestEntity = LoginRequestEntity();
             loginRequestEntity.avatar = photoUrl;
             loginRequestEntity.name = displayName;
@@ -89,8 +88,11 @@ class SignInController {
       Global.storageService.setString(
           AppConstants.STORAGE_USER_TOKEN_KEY, result.data!.access_token!);
       EasyLoading.dismiss();
-      Navigator.pushNamedAndRemoveUntil(
+      if (context.mounted) {
+         Navigator.pushNamedAndRemoveUntil(
           context, '/application', (route) => false);
+      }
+     
     } catch (e) {
       print('saving local storage error ${e.toString()}');
     }
