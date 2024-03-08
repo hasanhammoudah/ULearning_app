@@ -9,6 +9,7 @@ import 'package:ulearning_app/common/entities/user.dart';
 import 'package:ulearning_app/common/values/constants.dart';
 import 'package:ulearning_app/common/widgets/flutter_toast.dart';
 import 'package:ulearning_app/global.dart';
+import 'package:ulearning_app/pages/home/home_controller.dart';
 import 'package:ulearning_app/pages/sign_in/bloc/sign_in_bloc.dart';
 
 class SignInController {
@@ -54,7 +55,10 @@ class SignInController {
             loginRequestEntity.email = email;
             loginRequestEntity.open_id = id;
             loginRequestEntity.type = 1;
-            asyncPostAllData(loginRequestEntity);
+            await asyncPostAllData(loginRequestEntity);
+            if (context.mounted) {
+             await HomeController(context: context).init();
+            }
           } else {
             toastInfo(msg: 'Currently you are not a user of this app');
           }
@@ -74,7 +78,7 @@ class SignInController {
     }
   }
 
-  void asyncPostAllData(LoginRequestEntity loginRequestEntity) async {
+  Future<void> asyncPostAllData(LoginRequestEntity loginRequestEntity) async {
     EasyLoading.show(
       indicator: const CircularProgressIndicator(),
       maskType: EasyLoadingMaskType.clear,
@@ -89,10 +93,9 @@ class SignInController {
           AppConstants.STORAGE_USER_TOKEN_KEY, result.data!.access_token!);
       EasyLoading.dismiss();
       if (context.mounted) {
-         Navigator.pushNamedAndRemoveUntil(
-          context, '/application', (route) => false);
+        Navigator.pushNamedAndRemoveUntil(
+            context, '/application', (route) => false);
       }
-     
     } catch (e) {
       print('saving local storage error ${e.toString()}');
     }

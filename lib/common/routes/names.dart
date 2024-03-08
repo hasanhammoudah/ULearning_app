@@ -13,4 +13,8 @@ class AppRoutes {
 
   // for settings of the app
   static const SETTINGS = '/settings';
+
+  // for showing course detail
+    static const COURSE_DETAIL = '/course_detail';
+
 }
