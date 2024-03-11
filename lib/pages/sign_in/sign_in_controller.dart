@@ -57,7 +57,7 @@ class SignInController {
             loginRequestEntity.type = 1;
             await asyncPostAllData(loginRequestEntity);
             if (context.mounted) {
-             await HomeController(context: context).init();
+              await HomeController(context: context).init();
             }
           } else {
             toastInfo(msg: 'Currently you are not a user of this app');
@@ -89,6 +89,7 @@ class SignInController {
     try {
       Global.storageService.setString(
           AppConstants.STORAGE_USER_PROFILE_KEY, jsonEncode(result.data!));
+      print("................. my token is ${result.data!.access_token!}");
       Global.storageService.setString(
           AppConstants.STORAGE_USER_TOKEN_KEY, result.data!.access_token!);
       EasyLoading.dismiss();

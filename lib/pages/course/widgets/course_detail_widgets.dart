@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/values/colors.dart';
+import 'package:ulearning_app/common/values/constants.dart';
 import 'package:ulearning_app/common/widgets/base_text_widget.dart';
+import 'package:ulearning_app/pages/course/course_detail/bloc/course_detail_state.dart';
 
 AppBar buildAppBar() {
   return AppBar(
@@ -10,14 +12,14 @@ AppBar buildAppBar() {
   );
 }
 
-Widget thumbNail() {
+Widget thumbNail(String thumbnail) {
   return Container(
     width: 325.w,
     height: 200.h,
-    decoration: const BoxDecoration(
+    decoration: BoxDecoration(
       image: DecorationImage(
         fit: BoxFit.fitWidth,
-        image: AssetImage('assets/icons/image_1.png'),
+        image: NetworkImage("${AppConstants.SERVER_UPLOADS}$thumbnail"),
       ),
     ),
   );
@@ -105,12 +107,12 @@ Widget goButButton(String name) {
   );
 }
 
-Widget descriptionText() {
+Widget descriptionText(String description) {
   return reusableText(
     color: AppColors.primaryThirdElementText,
     fontSize: 11.sp,
     fontWeight: FontWeight.normal,
-    'Course Description Course Description Course Description Course Description Course DescriptionCourse DescriptionCourse DescriptionCourse DescriptionCourse Description Course Description',
+    description,
   );
 }
 
@@ -121,13 +123,13 @@ Widget courseSummaryTitle() {
   );
 }
 
-var imagesInfo = <String, String>{
-  '36 Hours Video': 'video_detail.png',
-  'Total 30 lessons': 'file_detail.png',
-  '67 Downloadable Resources': 'download_detail.png',
-};
-
-Widget courseSummaryView(BuildContext context) {
+Widget courseSummaryView(BuildContext context, CourseDetailStates state) {
+  var imagesInfo = <String, String>{
+    '${state.courseItem!.video_length ?? 0} Hours Video': 'video_detail.png',
+    'Total ${state.courseItem!.lesson_num ?? 0} lessons': 'file_detail.png',
+    '${state.courseItem!.down_num ?? 0} Downloadable Resources':
+        'download_detail.png',
+  };
   return Column(
     children: [
       ...List.generate(

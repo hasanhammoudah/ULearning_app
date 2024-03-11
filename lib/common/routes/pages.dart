@@ -4,8 +4,8 @@ import 'package:ulearning_app/common/routes/names.dart';
 import 'package:ulearning_app/global.dart';
 import 'package:ulearning_app/pages/application/application_page.dart';
 import 'package:ulearning_app/pages/application/bloc/application_bloc.dart';
-import 'package:ulearning_app/pages/course/bloc/course_detail_bloc.dart';
-import 'package:ulearning_app/pages/course/course_detail.dart';
+import 'package:ulearning_app/pages/course/bloc/course_bloc.dart';
+import 'package:ulearning_app/pages/course/course_detail/course_detail.dart';
 import 'package:ulearning_app/pages/home/bloc/home_page_bloc.dart';
 import 'package:ulearning_app/pages/home/home_page.dart';
 import 'package:ulearning_app/pages/profile/settings/bloc/settings_bloc.dart';
@@ -16,6 +16,8 @@ import 'package:ulearning_app/pages/sign_in/bloc/sign_in_bloc.dart';
 import 'package:ulearning_app/pages/sign_in/sign_in.dart';
 import 'package:ulearning_app/pages/welcome/bloc/welcome_bloc.dart';
 import 'package:ulearning_app/pages/welcome/welcome.dart';
+
+import '../../pages/course/course_detail/bloc/course_detail_bloc.dart';
 
 class AppPages {
   static List<PageEntity> routes() {
