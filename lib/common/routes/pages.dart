@@ -6,6 +6,8 @@ import 'package:ulearning_app/pages/application/application_page.dart';
 import 'package:ulearning_app/pages/application/bloc/application_bloc.dart';
 import 'package:ulearning_app/pages/course/bloc/course_bloc.dart';
 import 'package:ulearning_app/pages/course/course_detail/course_detail.dart';
+import 'package:ulearning_app/pages/course/paywebview/bloc/payview_bloc.dart';
+import 'package:ulearning_app/pages/course/paywebview/paywebview.dart';
 import 'package:ulearning_app/pages/home/bloc/home_page_bloc.dart';
 import 'package:ulearning_app/pages/home/home_page.dart';
 import 'package:ulearning_app/pages/profile/settings/bloc/settings_bloc.dart';
@@ -69,6 +71,13 @@ class AppPages {
         page: const CourseDetail(),
         bloc: BlocProvider(
           create: (_) => CourseDetailBloc(),
+        ),
+      ),
+        PageEntity(
+        route: AppRoutes.PAY_WEB_VIEW,
+        page: const PayWebView(),
+        bloc: BlocProvider(
+          create: (_) => PayviewBloc(),
         ),
       ),
     ];

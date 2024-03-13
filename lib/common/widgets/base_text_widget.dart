@@ -2,6 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/values/colors.dart';
 
+// AppBar buildAppBar(String url) {
+//   return AppBar(
+//     title: reusableText(url),
+//   );
+// }
+
 Widget reusableText(
   String text, {
   Color color = AppColors.primaryText,

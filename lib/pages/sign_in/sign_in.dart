@@ -70,7 +70,7 @@ class _SignInState extends State<SignIn> {
                             'login',
                             () {
                               SignInController(context: context)
-                                  .handlesSignIn("email");
+                                  .handleSignIn("email");
                             },
                           ),
                           buildLogInAndRegButton(

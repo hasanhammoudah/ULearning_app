@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ulearning_app/common/apis/course_api.dart';
 import 'package:ulearning_app/common/entities/course.dart';
+import 'package:ulearning_app/common/routes/names.dart';
 import 'package:ulearning_app/common/widgets/flutter_toast.dart';
 import 'package:ulearning_app/pages/course/course_detail/bloc/course_detail_bloc.dart';
 import 'package:ulearning_app/pages/course/course_detail/bloc/course_detail_event.dart';
@@ -45,9 +46,15 @@ class CourseDetailController {
     EasyLoading.dismiss();
     if (result.code == 200) {
       var url = Uri.decodeFull(result.data!);
-      print('---------------- my returned url is $url --------------');
+
+      var res = await Navigator.of(context)
+          .pushNamed(AppRoutes.PAY_WEB_VIEW, arguments: {"url": url});
+      if (res == "success") {
+        toastInfo(msg: result.msg!);
+      }
+      // print('---------------- my returned url is $url --------------');
     } else {
-      print('----------------failed payment--------------');
+      toastInfo(msg: result.msg!);
     }
   }
 }
