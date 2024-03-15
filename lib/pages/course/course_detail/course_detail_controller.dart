@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:ulearning_app/common/apis/course_api.dart';
-import 'package:ulearning_app/common/entities/course.dart';
+import 'package:ulearning_app/common/apis/lesson_api.dart';
+import 'package:ulearning_app/common/entities/entities.dart';
 import 'package:ulearning_app/common/routes/names.dart';
 import 'package:ulearning_app/common/widgets/flutter_toast.dart';
+import 'package:ulearning_app/pages/course/bloc/course_event.dart';
 import 'package:ulearning_app/pages/course/course_detail/bloc/course_detail_bloc.dart';
 import 'package:ulearning_app/pages/course/course_detail/bloc/course_detail_event.dart';
 
@@ -14,10 +16,11 @@ class CourseDetailController {
 
   void init() async {
     final args = ModalRoute.of(context)!.settings.arguments as Map;
-    asyncLoadAllData(args["id"]);
+    asyncLoadCourseData(args["id"]);
+    asyncLoadLessonData(args["id"]);
   }
 
-  asyncLoadAllData(int? id) async {
+  asyncLoadCourseData(int? id) async {
     CourseRequestEntity courseRequestEntity = CourseRequestEntity();
     courseRequestEntity.id = id;
     var result = await CourseAPI.courseDetail(params: courseRequestEntity);
@@ -33,6 +36,28 @@ class CourseDetailController {
       toastInfo(msg: 'Something went wrong');
       print('-------------------Error code ${result.code}----------');
     }
+  }
+
+  asyncLoadLessonData(int? id) async {
+    LessonRequestEntity lessonRequestEntity = LessonRequestEntity();
+    lessonRequestEntity.id = id;
+    var result = await LessonAPI.lessonList(params: lessonRequestEntity);
+    print(
+        '--------------my lesson Data ${result.data?.length.toString()}---------------------');
+
+ if (result.code == 200) {
+      if (context.mounted) {
+        context.read<CourseDetailBloc>().add(
+              TriggerLessonList(result.data!),
+            );
+      } else {
+        print('----------- context is not available--------');
+      }
+    } else {
+      toastInfo(msg: 'Something went wrong');
+      print('-------------------Error code ${result.code}----------');
+    }
+
   }
 
   void goBuy(int? id) async {
