@@ -217,7 +217,7 @@ Widget courseLessonList(CourseDetailStates state) {
                           15.h,
                         ),
                         image: DecorationImage(
-                          fit: BoxFit.fill,
+                          fit: BoxFit.fitHeight,
                           image:
                               NetworkImage(state.lessonItem![index].thumbnail!),
                         ),

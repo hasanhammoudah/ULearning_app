@@ -25,12 +25,15 @@ class HomeController {
       if (result.code == 200) {
         if (context.mounted) {
           context.read<HomePageBloc>().add(HomePageCourseItem(result.data!));
+          return;
         }
       } else {
         print(result.code);
+        return;
       }
     } else {
       print('User has already logged out');
     }
+    return;
   }
 }
