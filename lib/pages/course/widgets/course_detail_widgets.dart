@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning_app/common/routes/names.dart';
 import 'package:ulearning_app/common/values/colors.dart';
 import 'package:ulearning_app/common/values/constants.dart';
 import 'package:ulearning_app/common/widgets/base_text_widget.dart';
@@ -203,7 +204,10 @@ Widget courseLessonList(CourseDetailStates state) {
             ],
           ),
           child: InkWell(
-            onTap: () {},
+            onTap: () {
+              Navigator.of(context).pushNamed(AppRoutes.Lesson_DETAIL,
+                  arguments: {"id": state.lessonItem![index].id});
+            },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [

@@ -19,4 +19,7 @@ class AppRoutes {
 
 //pay web view
   static const PAY_WEB_VIEW = "/pay_web_view";
+
+  //show lesson detail with video player
+  static const Lesson_DETAIL = '/lesson_detail';
 }
