@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
       child: ScreenUtilInit(
         minTextAdapt: true,
         // rebuildFactor : RebuildFactor.all,
-        
         designSize: const Size(375, 812),
         builder: (context, child) {
           return MaterialApp(
