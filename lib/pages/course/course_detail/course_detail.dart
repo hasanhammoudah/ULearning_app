@@ -65,7 +65,7 @@ class _CourseDetailState extends State<CourseDetail> {
                                 SizedBox(
                                   height: 15.h,
                                 ),
-                                reusableText('Course Description'),
+                                reusableText2('Course Description'),
                                 SizedBox(
                                   height: 15.h,
                                 ),
@@ -89,7 +89,7 @@ class _CourseDetailState extends State<CourseDetail> {
                                 SizedBox(
                                   height: 20.h,
                                 ),
-                                reusableText('Lesson List'),
+                                reusableText2('Lesson List'),
                                 SizedBox(
                                   height: 20.h,
                                 ),

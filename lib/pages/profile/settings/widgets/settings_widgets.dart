@@ -6,7 +6,7 @@ AppBar buildAppBarForSettings() {
   return AppBar(
     title: Container(
       child: Container(
-        child: reusableText(
+        child: reusableText2(
           'Settings',
         ),
       ),

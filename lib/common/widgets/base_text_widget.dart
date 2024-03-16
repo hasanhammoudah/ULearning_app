@@ -8,7 +8,7 @@ import 'package:ulearning_app/common/values/colors.dart';
 //   );
 // }
 
-Widget reusableText(
+Widget reusableText2(
   String text, {
   Color color = AppColors.primaryText,
   double fontSize = 16,

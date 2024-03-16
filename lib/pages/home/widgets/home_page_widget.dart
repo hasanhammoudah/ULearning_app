@@ -218,12 +218,12 @@ Widget menuView() {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            reusableText(
+            reusableText2(
               'Choose your course',
             ),
             GestureDetector(
               onTap: () {},
-              child: reusableText(
+              child: reusableText2(
                 'See all',
                 color: AppColors.primaryThirdElementText,
                 fontSize: 10,
@@ -282,7 +282,7 @@ Widget _reusableMenuText(
         color: backgroundColor,
       ),
     ),
-    child: reusableText(
+    child: reusableText2(
       menuText,
       color: textColor,
       fontWeight: FontWeight.normal,

@@ -63,11 +63,9 @@ Widget reusableText(String text) {
     child: Text(
       text,
       style: TextStyle(
-        color: Colors.grey.withOpacity(
-          0.5,
-        ),
-        fontWeight: FontWeight.normal,
-        fontSize: 14.sp,
+        color: Colors.black,
+        fontWeight: FontWeight.bold,
+        fontSize: 16.sp,
       ),
     ),
   );

@@ -33,4 +33,20 @@ class LessonController {
       }
     }
   }
+
+  void playVideo(String url) {
+    if (videoPlayerController != null) {
+      videoPlayerController?.pause();
+      videoPlayerController?.dispose();
+    }
+    videoPlayerController = VideoPlayerController.network(url);
+    context.read<LessonBloc>().add(const TriggerPlay(false));
+    context.read<LessonBloc>().add(const TriggerUrlItem(null));
+    var initPlayer = videoPlayerController?.initialize().then((value) {
+      videoPlayerController?.seekTo(const Duration(milliseconds: 0));
+    });
+    context.read<LessonBloc>().add(TriggerUrlItem(initPlayer));
+    context.read<LessonBloc>().add(const TriggerPlay(true));
+    videoPlayerController?.play();
+  }
 }

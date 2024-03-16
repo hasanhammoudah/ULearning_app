@@ -9,7 +9,7 @@ import 'package:ulearning_app/pages/course/course_detail/bloc/course_detail_stat
 AppBar buildAppBar() {
   return AppBar(
     centerTitle: true,
-    title: reusableText('Course detail'),
+    title: reusableText2('Course detail'),
   );
 }
 
@@ -45,7 +45,7 @@ Widget menuView() {
                 color: AppColors.primaryElement,
               ),
             ),
-            child: reusableText(
+            child: reusableText2(
               'Author Page',
               color: AppColors.primaryElementText,
               fontWeight: FontWeight.normal,
@@ -72,7 +72,7 @@ Widget _iconAndNum(String iconPath, int num) {
           width: 20.w,
           height: 20.h,
         ),
-        reusableText(
+        reusableText2(
           num.toString(),
           color: AppColors.primaryThirdElementText,
           fontWeight: FontWeight.normal,
@@ -109,7 +109,7 @@ Widget goButButton(String name) {
 }
 
 Widget descriptionText(String description) {
-  return reusableText(
+  return reusableText2(
     color: AppColors.primaryThirdElementText,
     fontSize: 11.sp,
     fontWeight: FontWeight.normal,
@@ -118,7 +118,7 @@ Widget descriptionText(String description) {
 }
 
 Widget courseSummaryTitle() {
-  return reusableText(
+  return reusableText2(
     'The Course Includes',
     fontSize: 16.sp,
   );

@@ -18,3 +18,8 @@ class TriggerPlay extends LessonEvents {
   final bool isPlay;
   const TriggerPlay(this.isPlay);
 }
+
+class TriggerVideoIndex extends LessonEvents {
+  final int videoIndex;
+  const TriggerVideoIndex(this.videoIndex);
+}

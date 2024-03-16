@@ -16,7 +16,7 @@ AppBar buildAppbar() {
             'assets/icons/menu.png',
           ),
         ),
-        reusableText('Profile'),
+        reusableText2('Profile'),
         SizedBox(
           width: 24.w,
           height: 24.h,
