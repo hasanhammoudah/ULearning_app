@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/routes/names.dart';
 import 'package:ulearning_app/common/values/colors.dart';
 import 'package:ulearning_app/common/widgets/base_text_widget.dart';
+import 'package:ulearning_app/pages/profile/bloc/profile_state.dart';
 
 AppBar buildAppbar() {
   return AppBar(
@@ -112,4 +113,186 @@ Widget buildListView(BuildContext context) {
       )
     ],
   );
+}
+
+Widget buildRowView(BuildContext context) {
+  return Container(
+    margin: EdgeInsets.only(top: 20.h, bottom: 20.h, left: 25.w, right: 25.w),
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        GestureDetector(
+          onTap: () {},
+          child: Container(
+            padding: EdgeInsets.only(top: 7.h, bottom: 7.h),
+            width: 100.w,
+            decoration: BoxDecoration(
+              color: AppColors.primaryElement,
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 2,
+                    blurRadius: 3,
+                    offset: const Offset(
+                      0,
+                      3,
+                    ))
+              ],
+              borderRadius: BorderRadius.circular(15.w),
+              border: Border.all(
+                color: AppColors.primaryElement,
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 20.w,
+                  height: 20.h,
+                  child: Image.asset(
+                    'assets/icons/profile_video.png',
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                    top: 5.h,
+                  ),
+                  child: reusableText2(
+                    'My courses',
+                    color: AppColors.primaryElementText,
+                    fontSize: 11.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        GestureDetector(
+          onTap: () {},
+          child: Container(
+            padding: EdgeInsets.only(top: 7.h, bottom: 7.h),
+            width: 100.w,
+            decoration: BoxDecoration(
+              color: AppColors.primaryElement,
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 2,
+                    blurRadius: 3,
+                    offset: const Offset(
+                      0,
+                      3,
+                    ))
+              ],
+              borderRadius: BorderRadius.circular(15.w),
+              border: Border.all(
+                color: AppColors.primaryElement,
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 20.w,
+                  height: 20.h,
+                  child: Image.asset(
+                    'assets/icons/profile_video.png',
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                    top: 5.h,
+                  ),
+                  child: reusableText2(
+                    'My courses',
+                    color: AppColors.primaryElementText,
+                    fontSize: 11.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        GestureDetector(
+          onTap: () {},
+          child: Container(
+            padding: EdgeInsets.only(top: 7.h, bottom: 7.h),
+            width: 100.w,
+            decoration: BoxDecoration(
+              color: AppColors.primaryElement,
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.withOpacity(0.2),
+                    spreadRadius: 2,
+                    blurRadius: 3,
+                    offset: const Offset(
+                      0,
+                      3,
+                    ))
+              ],
+              borderRadius: BorderRadius.circular(15.w),
+              border: Border.all(
+                color: AppColors.primaryElement,
+              ),
+            ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                SizedBox(
+                  width: 20.w,
+                  height: 20.h,
+                  child: Image.asset(
+                    'assets/icons/profile_video.png',
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(
+                    top: 5.h,
+                  ),
+                  child: reusableText2(
+                    'My courses',
+                    color: AppColors.primaryElementText,
+                    fontSize: 11.sp,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    ),
+  );
+}
+
+Widget buildProfileName(ProfileStates state) {
+  return state.userProfile == null
+      ? Container(
+          child: reusableText2('No name found'),
+        )
+      : Container(
+          padding: EdgeInsets.only(
+            left: 50.w,
+            right: 50.w,
+          ),
+          margin: EdgeInsets.only(
+            bottom: 10.h,
+            top: 5.h,
+          ),
+          child: Text(
+            state.userProfile?.description ?? "no name given",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: AppColors.primarySecondaryElementText,
+              fontSize: 12.sp,
+              fontWeight: FontWeight.normal,
+            ),
+          ),
+        );
+
+  // SizedBox(
+  //   height: 30.h,
+  // ),
 }

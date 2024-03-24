@@ -22,4 +22,6 @@ class AppRoutes {
 
   //show lesson detail with video player
   static const Lesson_DETAIL = '/lesson_detail';
+
+  static const PROFILE = '/profile';
 }

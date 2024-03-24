@@ -9,6 +9,7 @@ import 'package:ulearning_app/pages/home/bloc/home_page_event.dart';
 
 class HomeController {
   late BuildContext context;
+  // TODO fix this
   UserItem? get userProfile => Global.storageService.getUserProfile();
 
   static final HomeController _singleton = HomeController._internal();
