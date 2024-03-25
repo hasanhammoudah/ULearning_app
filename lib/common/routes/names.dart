@@ -23,5 +23,14 @@ class AppRoutes {
   //show lesson detail with video player
   static const Lesson_DETAIL = '/lesson_detail';
 
+// profile page
   static const PROFILE = '/profile';
+
+// view my courses page
+
+  static const MY_COURSES = '/my_courses';
+// view my buy courses page
+  static const BUY_COURSES = '/buy_courses';
+  // view my payment history
+  static const PAYMENT_DETAILS = '/payment_details';
 }

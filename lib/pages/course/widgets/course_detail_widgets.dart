@@ -231,9 +231,9 @@ Widget courseLessonList(CourseDetailStates state) {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        _listContainer(
+                        listContainer(
                             state.lessonItem![index].name.toString()),
-                        _listContainer(
+                        listContainer(
                           state.lessonItem![index].description.toString(),
                           fontSize: 10,
                           color: AppColors.primaryThirdElementText,
@@ -252,22 +252,3 @@ Widget courseLessonList(CourseDetailStates state) {
   );
 }
 
-Widget _listContainer(String name,
-    {double fontSize = 13,
-    Color color = AppColors.primaryText,
-    FontWeight fontWeight = FontWeight.bold}) {
-  return Container(
-    width: 200.w,
-    margin: EdgeInsets.only(left: 6.w),
-    child: Text(
-      name,
-      overflow: TextOverflow.clip,
-      maxLines: 1,
-      style: TextStyle(
-        color: color,
-        fontSize: fontSize.sp,
-        fontWeight: fontWeight,
-      ),
-    ),
-  );
-}

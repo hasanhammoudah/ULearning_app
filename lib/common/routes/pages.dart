@@ -6,6 +6,10 @@ import 'package:ulearning_app/pages/application/application_page.dart';
 import 'package:ulearning_app/pages/application/bloc/application_bloc.dart';
 import 'package:ulearning_app/pages/course/bloc/course_bloc.dart';
 import 'package:ulearning_app/pages/course/course_detail/course_detail.dart';
+import 'package:ulearning_app/pages/profile/buy_courses/bloc/buy_courses_bloc.dart';
+import 'package:ulearning_app/pages/profile/buy_courses/buy_courses.dart';
+import 'package:ulearning_app/pages/profile/my_courses/bloc/my_courses_bloc.dart';
+import 'package:ulearning_app/pages/profile/my_courses/my_courses.dart';
 import 'package:ulearning_app/pages/course/paywebview/bloc/payview_bloc.dart';
 import 'package:ulearning_app/pages/course/paywebview/paywebview.dart';
 import 'package:ulearning_app/pages/home/bloc/home_page_bloc.dart';
@@ -13,6 +17,8 @@ import 'package:ulearning_app/pages/home/home_page.dart';
 import 'package:ulearning_app/pages/lesson/bloc/lesson_bloc.dart';
 import 'package:ulearning_app/pages/lesson/lesson_detail.dart';
 import 'package:ulearning_app/pages/profile/bloc/profile_bloc.dart';
+import 'package:ulearning_app/pages/profile/payment_details/cubit/payment_details_cubit.dart';
+import 'package:ulearning_app/pages/profile/payment_details/payment_details.dart';
 import 'package:ulearning_app/pages/profile/profile_page.dart';
 import 'package:ulearning_app/pages/profile/settings/bloc/settings_bloc.dart';
 import 'package:ulearning_app/pages/profile/settings/settings_page.dart';
@@ -96,6 +102,27 @@ class AppPages {
         page: const ProfilePage(),
         bloc: BlocProvider(
           create: (_) => ProfileBloc(),
+        ),
+      ),
+        PageEntity(
+        route: AppRoutes.MY_COURSES,
+        page: const MyCourses(),
+        bloc: BlocProvider(
+          create: (_) => MyCoursesBloc(),
+        ),
+      ),
+        PageEntity(
+        route: AppRoutes.BUY_COURSES,
+        page: const BuyCourses(),
+        bloc: BlocProvider(
+          create: (_) => BuyCoursesBloc(),
+        ),
+      ),
+         PageEntity(
+        route: AppRoutes.PAYMENT_DETAILS,
+        page: const PaymentDetails(),
+        bloc: BlocProvider(
+          create: (_) => PaymentDetailsCubit(),
         ),
       ),
     ];

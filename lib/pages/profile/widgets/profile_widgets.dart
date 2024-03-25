@@ -72,7 +72,13 @@ Widget buildListView(BuildContext context) {
       ...List.generate(
         imagesInfo.length,
         (index) => GestureDetector(
-          onTap: () => Navigator.pushNamed(context, AppRoutes.SETTINGS),
+          onTap: () {
+            if (index == 0) {
+              Navigator.pushNamed(context, AppRoutes.SETTINGS);
+            } else if (index == 1) {
+              Navigator.pushNamed(context, AppRoutes.PAYMENT_DETAILS);
+            }
+          },
           child: Container(
             margin: EdgeInsets.only(
               bottom: 15.h,
@@ -121,147 +127,13 @@ Widget buildRowView(BuildContext context) {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        GestureDetector(
-          onTap: () {},
-          child: Container(
-            padding: EdgeInsets.only(top: 7.h, bottom: 7.h),
-            width: 100.w,
-            decoration: BoxDecoration(
-              color: AppColors.primaryElement,
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    spreadRadius: 2,
-                    blurRadius: 3,
-                    offset: const Offset(
-                      0,
-                      3,
-                    ))
-              ],
-              borderRadius: BorderRadius.circular(15.w),
-              border: Border.all(
-                color: AppColors.primaryElement,
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 20.w,
-                  height: 20.h,
-                  child: Image.asset(
-                    'assets/icons/profile_video.png',
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                    top: 5.h,
-                  ),
-                  child: reusableText2(
-                    'My courses',
-                    color: AppColors.primaryElementText,
-                    fontSize: 11.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        GestureDetector(
-          onTap: () {},
-          child: Container(
-            padding: EdgeInsets.only(top: 7.h, bottom: 7.h),
-            width: 100.w,
-            decoration: BoxDecoration(
-              color: AppColors.primaryElement,
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    spreadRadius: 2,
-                    blurRadius: 3,
-                    offset: const Offset(
-                      0,
-                      3,
-                    ))
-              ],
-              borderRadius: BorderRadius.circular(15.w),
-              border: Border.all(
-                color: AppColors.primaryElement,
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 20.w,
-                  height: 20.h,
-                  child: Image.asset(
-                    'assets/icons/profile_video.png',
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                    top: 5.h,
-                  ),
-                  child: reusableText2(
-                    'My courses',
-                    color: AppColors.primaryElementText,
-                    fontSize: 11.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-        GestureDetector(
-          onTap: () {},
-          child: Container(
-            padding: EdgeInsets.only(top: 7.h, bottom: 7.h),
-            width: 100.w,
-            decoration: BoxDecoration(
-              color: AppColors.primaryElement,
-              boxShadow: [
-                BoxShadow(
-                    color: Colors.grey.withOpacity(0.2),
-                    spreadRadius: 2,
-                    blurRadius: 3,
-                    offset: const Offset(
-                      0,
-                      3,
-                    ))
-              ],
-              borderRadius: BorderRadius.circular(15.w),
-              border: Border.all(
-                color: AppColors.primaryElement,
-              ),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                SizedBox(
-                  width: 20.w,
-                  height: 20.h,
-                  child: Image.asset(
-                    'assets/icons/profile_video.png',
-                  ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(
-                    top: 5.h,
-                  ),
-                  child: reusableText2(
-                    'My courses',
-                    color: AppColors.primaryElementText,
-                    fontSize: 11.sp,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
+        _rowView("profile_video.png", "My courses", () {
+          Navigator.pushNamed(context, AppRoutes.MY_COURSES);
+        }),
+        _rowView("profile_book.png", "Buy courses", () {
+          Navigator.pushNamed(context, AppRoutes.BUY_COURSES);
+        }),
+        _rowView("profile_star.png", "4.9", () {}),
       ],
     ),
   );
@@ -295,4 +167,54 @@ Widget buildProfileName(ProfileStates state) {
   // SizedBox(
   //   height: 30.h,
   // ),
+}
+
+Widget _rowView(String iconPath, String itemName, void Function()? func) {
+  return GestureDetector(
+    onTap: func,
+    child: Container(
+      padding: EdgeInsets.only(top: 7.h, bottom: 7.h),
+      width: 100.w,
+      decoration: BoxDecoration(
+        color: AppColors.primaryElement,
+        boxShadow: [
+          BoxShadow(
+              color: Colors.grey.withOpacity(0.2),
+              spreadRadius: 2,
+              blurRadius: 3,
+              offset: const Offset(
+                0,
+                3,
+              ))
+        ],
+        borderRadius: BorderRadius.circular(15.w),
+        border: Border.all(
+          color: AppColors.primaryElement,
+        ),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: 20.w,
+            height: 20.h,
+            child: Image.asset(
+              'assets/icons/$iconPath',
+            ),
+          ),
+          Container(
+            margin: EdgeInsets.only(
+              top: 5.h,
+            ),
+            child: reusableText2(
+              itemName,
+              color: AppColors.primaryElementText,
+              fontSize: 11.sp,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ],
+      ),
+    ),
+  );
 }
