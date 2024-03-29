@@ -4,6 +4,7 @@ import 'package:ulearning_app/common/values/colors.dart';
 
 AppBar buildAppBar(String type) {
   return AppBar(
+    centerTitle: true,
     bottom: PreferredSize(
       preferredSize: const Size.fromHeight(1.0),
       child: Container(

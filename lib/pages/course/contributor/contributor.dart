@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/values/colors.dart';
@@ -63,7 +64,14 @@ class _ContributorState extends State<Contributor> {
                   SizedBox(
                     height: 20.h,
                   ),
-                  appPrimaryButton('Go chat'),
+                  GestureDetector(
+                    onTap: () {
+                      if (state.authorItem != null) {
+                        _contributorController.goChat(state.authorItem!);
+                      }
+                    },
+                    child: appPrimaryButton('Go chat'),
+                  ),
                   SizedBox(
                     height: 20.h,
                   ),

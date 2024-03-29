@@ -34,7 +34,7 @@ class AppRoutes {
   // view my payment history
   static const PAYMENT_DETAILS = '/payment_details';
 // contributor page
-
-    static const CONTRIBUTOR = '/contributor';
-
+  static const CONTRIBUTOR = '/contributor';
+  // chat page
+  static const CHAT = '/chat';
 }

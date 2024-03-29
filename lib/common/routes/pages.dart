@@ -8,6 +8,8 @@ import 'package:ulearning_app/pages/course/bloc/course_bloc.dart';
 import 'package:ulearning_app/pages/course/contributor/contributor.dart';
 import 'package:ulearning_app/pages/course/contributor/cubit/contributor_cubit.dart';
 import 'package:ulearning_app/pages/course/course_detail/course_detail.dart';
+import 'package:ulearning_app/pages/messages/chat/bloc/chat_bloc.dart';
+import 'package:ulearning_app/pages/messages/chat/chat.dart';
 import 'package:ulearning_app/pages/profile/buy_courses/bloc/buy_courses_bloc.dart';
 import 'package:ulearning_app/pages/profile/buy_courses/buy_courses.dart';
 import 'package:ulearning_app/pages/profile/my_courses/bloc/my_courses_bloc.dart';
@@ -134,6 +136,13 @@ class AppPages {
         page: const Contributor(),
         bloc: BlocProvider(
           create: (_) => ContributorCubit(),
+        ),
+      ),
+      PageEntity(
+        route: AppRoutes.CHAT,
+        page: const ChatPage(),
+        bloc: BlocProvider(
+          create: (_) => ChatBloc(),
         ),
       ),
     ];
