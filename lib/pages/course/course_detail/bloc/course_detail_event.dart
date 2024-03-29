@@ -14,3 +14,8 @@ class TriggerLessonList extends CourseDetailEvents {
   const TriggerLessonList(this.lessonItem) : super();
   final List<LessonItem> lessonItem;
 }
+
+class TriggerCheckBuy extends CourseDetailEvents {
+  const TriggerCheckBuy(this.checkBuy) : super();
+  final bool checkBuy;
+}

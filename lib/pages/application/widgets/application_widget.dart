@@ -1,22 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/values/colors.dart';
 import 'package:ulearning_app/pages/home/home_page.dart';
 import 'package:ulearning_app/pages/profile/profile_page.dart';
+import 'package:ulearning_app/pages/search/bloc/search_bloc.dart';
+import 'package:ulearning_app/pages/search/search.dart';
 
 Widget buildPage(int index) {
-  List<Widget> _widget = const [
-    HomePage(),
-    Center(
-      child: Text('Search'),
+  List<Widget> _widget = [
+    const HomePage(),
+    BlocProvider<SearchBloc>(
+      create: (context) => SearchBloc(),
+      child: Search(),
     ),
-    Center(
+    const Center(
       child: Text('Course'),
     ),
-    Center(
+    const Center(
       child: Text('Chat'),
     ),
-    ProfilePage(),
+    const ProfilePage(),
   ];
   return _widget[index];
 }

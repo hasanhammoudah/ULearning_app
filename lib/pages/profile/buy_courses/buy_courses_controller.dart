@@ -14,7 +14,7 @@ class BuyCoursesController {
 
   asyncLoadBuyCoursesData() async {
     context.read<BuyCoursesBloc>().add(const TriggerLoadingBuyCoursesEvents());
-    var result = await CourseAPI.courseBought();
+    var result = await CourseAPI.coursesBought();
     if (result.code == 200) {
       if (context.mounted) {
         context

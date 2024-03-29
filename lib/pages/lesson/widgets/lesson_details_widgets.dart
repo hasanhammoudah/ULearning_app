@@ -234,7 +234,8 @@ Widget _buildLessonItems(BuildContext context, int index, LessonVideoItem item,
                     height: 24.h,
                   ),
                 ),
-              )
+              ),
+           
             ],
           )
         ],

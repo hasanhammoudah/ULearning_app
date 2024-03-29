@@ -5,6 +5,8 @@ import 'package:ulearning_app/global.dart';
 import 'package:ulearning_app/pages/application/application_page.dart';
 import 'package:ulearning_app/pages/application/bloc/application_bloc.dart';
 import 'package:ulearning_app/pages/course/bloc/course_bloc.dart';
+import 'package:ulearning_app/pages/course/contributor/contributor.dart';
+import 'package:ulearning_app/pages/course/contributor/cubit/contributor_cubit.dart';
 import 'package:ulearning_app/pages/course/course_detail/course_detail.dart';
 import 'package:ulearning_app/pages/profile/buy_courses/bloc/buy_courses_bloc.dart';
 import 'package:ulearning_app/pages/profile/buy_courses/buy_courses.dart';
@@ -24,6 +26,8 @@ import 'package:ulearning_app/pages/profile/settings/bloc/settings_bloc.dart';
 import 'package:ulearning_app/pages/profile/settings/settings_page.dart';
 import 'package:ulearning_app/pages/register/bloc/register_bloc.dart';
 import 'package:ulearning_app/pages/register/register.dart';
+import 'package:ulearning_app/pages/search/bloc/search_bloc.dart';
+import 'package:ulearning_app/pages/search/search.dart';
 import 'package:ulearning_app/pages/sign_in/bloc/sign_in_bloc.dart';
 import 'package:ulearning_app/pages/sign_in/sign_in.dart';
 import 'package:ulearning_app/pages/welcome/bloc/welcome_bloc.dart';
@@ -76,53 +80,60 @@ class AppPages {
           create: (_) => SettingsBloc(),
         ),
       ),
-        PageEntity(
+      PageEntity(
         route: AppRoutes.COURSE_DETAIL,
         page: const CourseDetail(),
         bloc: BlocProvider(
           create: (_) => CourseDetailBloc(),
         ),
       ),
-        PageEntity(
+      PageEntity(
         route: AppRoutes.Lesson_DETAIL,
         page: const LessonDetail(),
         bloc: BlocProvider(
           create: (_) => LessonBloc(),
         ),
       ),
-        PageEntity(
+      PageEntity(
         route: AppRoutes.PAY_WEB_VIEW,
         page: const PayWebView(),
         bloc: BlocProvider(
           create: (_) => PayviewBloc(),
         ),
       ),
-        PageEntity(
+      PageEntity(
         route: AppRoutes.PROFILE,
         page: const ProfilePage(),
         bloc: BlocProvider(
           create: (_) => ProfileBloc(),
         ),
       ),
-        PageEntity(
+      PageEntity(
         route: AppRoutes.MY_COURSES,
         page: const MyCourses(),
         bloc: BlocProvider(
           create: (_) => MyCoursesBloc(),
         ),
       ),
-        PageEntity(
+      PageEntity(
         route: AppRoutes.BUY_COURSES,
         page: const BuyCourses(),
         bloc: BlocProvider(
           create: (_) => BuyCoursesBloc(),
         ),
       ),
-         PageEntity(
+      PageEntity(
         route: AppRoutes.PAYMENT_DETAILS,
         page: const PaymentDetails(),
         bloc: BlocProvider(
           create: (_) => PaymentDetailsCubit(),
+        ),
+      ),
+      PageEntity(
+        route: AppRoutes.CONTRIBUTOR,
+        page: const Contributor(),
+        bloc: BlocProvider(
+          create: (_) => ContributorCubit(),
         ),
       ),
     ];

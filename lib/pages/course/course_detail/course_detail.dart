@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:ulearning_app/common/values/constants.dart';
 import 'package:ulearning_app/common/widgets/base_text_widget.dart';
+import 'package:ulearning_app/common/widgets/image_widgets.dart';
 import 'package:ulearning_app/pages/course/course_detail/bloc/course_detail_bloc.dart';
 import 'package:ulearning_app/pages/course/course_detail/bloc/course_detail_state.dart';
 import 'package:ulearning_app/pages/course/course_detail/course_detail_controller.dart';
@@ -56,12 +58,17 @@ class _CourseDetailState extends State<CourseDetail> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                thumbNail(
-                                    state.courseItem!.thumbnail!.toString()),
+                                cachedNetworkImage(
+                                  '${AppConstants.SERVER_UPLOADS}${state.courseItem!.thumbnail!.toString()}',
+                                  height: 200.h,
+                                  width: 325.w,
+                                  defaultImage: "assets/icons/image_2.png",
+                                  boxFit: BoxFit.fitWidth,
+                                ),
                                 SizedBox(
                                   height: 15.h,
                                 ),
-                                menuView(),
+                                menuView(context, state),
                                 SizedBox(
                                   height: 15.h,
                                 ),
@@ -79,7 +86,7 @@ class _CourseDetailState extends State<CourseDetail> {
                                     _courseDetailController
                                         .goBuy(state.courseItem!.id);
                                   },
-                                  child: goButButton('Go Buy'),
+                                  child: appPrimaryButton('Go Buy'),
                                 ),
                                 SizedBox(
                                   height: 20.h,

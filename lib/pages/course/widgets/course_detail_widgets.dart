@@ -4,6 +4,7 @@ import 'package:ulearning_app/common/routes/names.dart';
 import 'package:ulearning_app/common/values/colors.dart';
 import 'package:ulearning_app/common/values/constants.dart';
 import 'package:ulearning_app/common/widgets/base_text_widget.dart';
+import 'package:ulearning_app/common/widgets/flutter_toast.dart';
 import 'package:ulearning_app/pages/course/course_detail/bloc/course_detail_state.dart';
 
 AppBar buildAppBar() {
@@ -26,13 +27,16 @@ Widget thumbNail(String thumbnail) {
   );
 }
 
-Widget menuView() {
+Widget menuView(BuildContext context, CourseDetailStates state) {
   return SizedBox(
     width: 325.w,
     child: Row(
       children: [
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).pushNamed(AppRoutes.CONTRIBUTOR,
+                arguments: {"token": state.courseItem!.user_token});
+          },
           child: Container(
             padding: EdgeInsets.symmetric(
               horizontal: 15.w,
@@ -78,32 +82,6 @@ Widget _iconAndNum(String iconPath, int num) {
           fontWeight: FontWeight.normal,
         ),
       ],
-    ),
-  );
-}
-
-Widget goButButton(String name) {
-  return Container(
-    padding: EdgeInsets.only(top: 13.h),
-    width: 330.w,
-    height: 50.h,
-    decoration: BoxDecoration(
-      color: AppColors.primaryElement,
-      borderRadius: BorderRadius.circular(
-        10.w,
-      ),
-      border: Border.all(
-        color: AppColors.primaryElement,
-      ),
-    ),
-    child: Text(
-      name,
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        color: AppColors.primaryElementText,
-        fontSize: 16.sp,
-        fontWeight: FontWeight.normal,
-      ),
     ),
   );
 }
@@ -205,8 +183,12 @@ Widget courseLessonList(CourseDetailStates state) {
           ),
           child: InkWell(
             onTap: () {
-              Navigator.of(context).pushNamed(AppRoutes.Lesson_DETAIL,
-                  arguments: {"id": state.lessonItem![index].id});
+              if (state.checkBuy == true) {
+                Navigator.of(context).pushNamed(AppRoutes.Lesson_DETAIL,
+                    arguments: {"id": state.lessonItem![index].id});
+              } else {
+                toastInfo(msg: 'Please buy this course before you watch');
+              }
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -231,8 +213,7 @@ Widget courseLessonList(CourseDetailStates state) {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        listContainer(
-                            state.lessonItem![index].name.toString()),
+                        listContainer(state.lessonItem![index].name.toString()),
                         listContainer(
                           state.lessonItem![index].description.toString(),
                           fontSize: 10,
@@ -243,6 +224,11 @@ Widget courseLessonList(CourseDetailStates state) {
                     ),
                   ],
                 ),
+                Image(
+                  height: 24.h,
+                  width: 24.h,
+                  image: const AssetImage("assets/icons/arrow_right.png"),
+                ),
               ],
             ),
           ),
@@ -251,4 +237,3 @@ Widget courseLessonList(CourseDetailStates state) {
     ),
   );
 }
-

@@ -33,4 +33,8 @@ class AppRoutes {
   static const BUY_COURSES = '/buy_courses';
   // view my payment history
   static const PAYMENT_DETAILS = '/payment_details';
+// contributor page
+
+    static const CONTRIBUTOR = '/contributor';
+
 }

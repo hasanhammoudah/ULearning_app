@@ -6,6 +6,7 @@ import 'package:ulearning_app/common/entities/course.dart';
 import 'package:ulearning_app/common/values/colors.dart';
 import 'package:ulearning_app/common/values/constants.dart';
 import 'package:ulearning_app/common/widgets/base_text_widget.dart';
+import 'package:ulearning_app/common/widgets/image_widgets.dart';
 import 'package:ulearning_app/pages/home/bloc/home_page_bloc.dart';
 import 'package:ulearning_app/pages/home/bloc/home_page_event.dart';
 import 'package:ulearning_app/pages/home/bloc/home_page_state.dart';
@@ -56,97 +57,6 @@ Widget homePageText(String text,
         fontWeight: FontWeight.bold,
         fontSize: 24.sp,
       ),
-    ),
-  );
-}
-
-Widget searchView() {
-  return Container(
-    width: 280.w,
-    height: 40.h,
-    decoration: BoxDecoration(
-      color: AppColors.primaryBackground,
-      borderRadius: BorderRadius.circular(
-        15.h,
-      ),
-      border: Border.all(
-        color: AppColors.primaryFourthElementText,
-      ),
-    ),
-    child: Row(
-      children: [
-        Container(
-          margin: EdgeInsets.only(
-            left: 17.w,
-          ),
-          width: 16.w,
-          height: 16.w,
-          child: Image.asset('assets/icons/search.png'),
-        ),
-        Container(
-          width: 240.w,
-          height: 40.h,
-          child: TextField(
-            onChanged: (value) => () {},
-            keyboardType: TextInputType.multiline,
-            decoration: const InputDecoration(
-              contentPadding: EdgeInsets.fromLTRB(5, 5, 0, 5),
-              hintText: 'search your course',
-              border: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                ),
-              ),
-              enabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                ),
-              ),
-              disabledBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                ),
-              ),
-              focusedBorder: OutlineInputBorder(
-                borderSide: BorderSide(
-                  color: Colors.transparent,
-                ),
-              ),
-              hintStyle: TextStyle(
-                color: AppColors.primarySecondaryElementText,
-              ),
-            ),
-            style: TextStyle(
-              fontFamily: 'Avenir',
-              color: AppColors.primaryText,
-              fontWeight: FontWeight.normal,
-              fontSize: 14.sp,
-            ),
-            autocorrect: false,
-            obscureText: false,
-          ),
-        ),
-        GestureDetector(
-          child: Container(
-            width: 40.w,
-            height: 40.h,
-            decoration: BoxDecoration(
-              color: AppColors.primaryElement,
-              borderRadius: BorderRadius.all(
-                Radius.circular(
-                  13.w,
-                ),
-              ),
-              border: Border.all(
-                color: AppColors.primaryElement,
-              ),
-            ),
-            child: Image.asset(
-              'assets/icons/options.png',
-            ),
-          ),
-        ),
-      ],
     ),
   );
 }
@@ -292,47 +202,49 @@ Widget _reusableMenuText(
 }
 
 Widget courseGrid(CourseItem item) {
-  return Container(
-    padding: EdgeInsets.all(12.w),
-    decoration: BoxDecoration(
-      borderRadius: BorderRadius.circular(15.w),
-      image: DecorationImage(
-        fit: BoxFit.fill,
-        image: NetworkImage(AppConstants.SERVER_UPLOADS + item.thumbnail!),
+  return cachedNetworkImage(AppConstants.SERVER_UPLOADS + item.thumbnail!,
+      child: Container(
+        padding: EdgeInsets.all(12.w),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(15.w),
+          image: DecorationImage(
+            fit: BoxFit.fill,
+            image: NetworkImage(AppConstants.SERVER_UPLOADS + item.thumbnail!),
+          ),
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              item.name ?? "",
+              maxLines: 1,
+              overflow: TextOverflow.fade,
+              textAlign: TextAlign.left,
+              softWrap: false,
+              style: TextStyle(
+                color: AppColors.primaryElementText,
+                fontWeight: FontWeight.bold,
+                fontSize: 11.sp,
+              ),
+            ),
+            SizedBox(
+              height: 5.h,
+            ),
+            Text(
+              item.description ?? "",
+              maxLines: 1,
+              overflow: TextOverflow.fade,
+              textAlign: TextAlign.left,
+              softWrap: false,
+              style: TextStyle(
+                color: AppColors.primaryFourthElementText,
+                fontWeight: FontWeight.normal,
+                fontSize: 8.sp,
+              ),
+            ),
+          ],
+        ),
       ),
-    ),
-    child: Column(
-      mainAxisAlignment: MainAxisAlignment.end,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          item.name ?? "",
-          maxLines: 1,
-          overflow: TextOverflow.fade,
-          textAlign: TextAlign.left,
-          softWrap: false,
-          style: TextStyle(
-            color: AppColors.primaryElementText,
-            fontWeight: FontWeight.bold,
-            fontSize: 11.sp,
-          ),
-        ),
-        SizedBox(
-          height: 5.h,
-        ),
-        Text(
-          item.description ?? "",
-          maxLines: 1,
-          overflow: TextOverflow.fade,
-          textAlign: TextAlign.left,
-          softWrap: false,
-          style: TextStyle(
-            color: AppColors.primaryFourthElementText,
-            fontWeight: FontWeight.normal,
-            fontSize: 8.sp,
-          ),
-        ),
-      ],
-    ),
-  );
+      defaultImage: "assets/icons/image.png");
 }

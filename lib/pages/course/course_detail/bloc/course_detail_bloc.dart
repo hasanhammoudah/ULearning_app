@@ -6,6 +6,8 @@ class CourseDetailBloc extends Bloc<CourseDetailEvents, CourseDetailStates> {
   CourseDetailBloc() : super(const CourseDetailStates()) {
     on<TriggerCourseDetail>(_triggerCourseDetail);
     on<TriggerLessonList>(_triggerLessonlist);
+        on<TriggerCheckBuy>(_triggerCheckBuy);
+
   }
   void _triggerCourseDetail(
       TriggerCourseDetail event, Emitter<CourseDetailStates> emit) {
@@ -15,5 +17,9 @@ class CourseDetailBloc extends Bloc<CourseDetailEvents, CourseDetailStates> {
   void _triggerLessonlist(
       TriggerLessonList event, Emitter<CourseDetailStates> emit) {
     emit(state.copyWith(lessonItem: event.lessonItem));
+  }
+   void _triggerCheckBuy(
+      TriggerCheckBuy event, Emitter<CourseDetailStates> emit) {
+    emit(state.copyWith(checkBuy: event.checkBuy));
   }
 }

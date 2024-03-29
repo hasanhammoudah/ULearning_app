@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/entities/user.dart';
 import 'package:ulearning_app/common/routes/names.dart';
 import 'package:ulearning_app/common/values/colors.dart';
+import 'package:ulearning_app/common/widgets/base_text_widget.dart';
 import 'package:ulearning_app/pages/home/bloc/home_page_bloc.dart';
 import 'package:ulearning_app/pages/home/bloc/home_page_state.dart';
 import 'package:ulearning_app/pages/home/home_controller.dart';
@@ -70,7 +71,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   SliverToBoxAdapter(
-                    child: searchView(),
+                    child: searchView(context, 'search your courses'),
                   ),
                   SliverToBoxAdapter(
                     child: sliderView(context, state),
