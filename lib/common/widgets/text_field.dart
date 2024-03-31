@@ -2,9 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/values/colors.dart';
 
-Widget appTextField(String hintText, String textType,
-    void Function(String value)? func,{int? maxLines=1}) {
+Widget appTextField(
+  String hintText,
+  String textType,
+  void Function(String value)? func, {
+  int? maxLines = 1,
+  TextEditingController? controller,
+}) {
   return TextField(
+    controller: controller,
     maxLines: maxLines,
     onChanged: (value) => func!(value),
     keyboardType: TextInputType.multiline,

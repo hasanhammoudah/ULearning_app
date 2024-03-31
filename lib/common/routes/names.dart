@@ -37,4 +37,6 @@ class AppRoutes {
   static const CONTRIBUTOR = '/contributor';
   // chat page
   static const CHAT = '/chat';
+  // chat page
+  static const MESSAGE = '/message';
 }

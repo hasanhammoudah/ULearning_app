@@ -9,11 +9,11 @@ abstract class ChatEvents extends Equatable {
 }
 
 class TriggerMsgContentList extends ChatEvents {
-  const TriggerMsgContentList(this.msgContent);
-  final Msgcontent msgContent;
+  const TriggerMsgContentList(this.msgContentList);
+  final Msgcontent msgContentList;
 
   @override
-  List<Object> get props => [msgContent];
+  List<Object> get props => [msgContentList];
 }
 
 class TriggerAddMsgContent extends ChatEvents {
@@ -30,4 +30,19 @@ class TriggerMoreStatus extends ChatEvents {
 
   @override
   List<Object> get props => [moreStatus];
+}
+
+class TriggerClearMsgList extends ChatEvents {
+  const TriggerClearMsgList();
+
+  @override
+  List<Object> get props => [];
+}
+
+class TriggerLoadMsgData extends ChatEvents {
+  const TriggerLoadMsgData(this.isLoading);
+  final bool isLoading;
+
+  @override
+  List<Object> get props => [isLoading];
 }

@@ -10,6 +10,8 @@ import 'package:ulearning_app/pages/course/contributor/cubit/contributor_cubit.d
 import 'package:ulearning_app/pages/course/course_detail/course_detail.dart';
 import 'package:ulearning_app/pages/messages/chat/bloc/chat_bloc.dart';
 import 'package:ulearning_app/pages/messages/chat/chat.dart';
+import 'package:ulearning_app/pages/messages/message/cubit/message_cubit.dart';
+import 'package:ulearning_app/pages/messages/message/message.dart';
 import 'package:ulearning_app/pages/profile/buy_courses/bloc/buy_courses_bloc.dart';
 import 'package:ulearning_app/pages/profile/buy_courses/buy_courses.dart';
 import 'package:ulearning_app/pages/profile/my_courses/bloc/my_courses_bloc.dart';
@@ -145,6 +147,13 @@ class AppPages {
           create: (_) => ChatBloc(),
         ),
       ),
+      // PageEntity(
+      //   route: AppRoutes.MESSAGE,
+      //   page: const Message(),
+      //   bloc: BlocProvider(
+      //     create: (_) => MessageCubit(),
+      //   ),
+      // ),
     ];
   }
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/values/colors.dart';
@@ -8,6 +7,7 @@ import 'package:ulearning_app/pages/common_widgets.dart';
 import 'package:ulearning_app/pages/messages/chat/bloc/chat_bloc.dart';
 import 'package:ulearning_app/pages/messages/chat/bloc/chat_event.dart';
 import 'package:ulearning_app/pages/messages/chat/bloc/chat_state.dart';
+import 'package:ulearning_app/pages/messages/chat/chat_controller.dart';
 import 'package:ulearning_app/pages/messages/chat/widgets/chat_widget.dart';
 
 class ChatPage extends StatefulWidget {
@@ -18,6 +18,23 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
+  late ChatController _chatController;
+
+  @override
+  void didChangeDependencies() {
+    _chatController = ChatController(context: context);
+ 
+      _chatController.init();
+   
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    _chatController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -29,6 +46,34 @@ class _ChatPageState extends State<ChatPage> {
             return Stack(
               alignment: Alignment.bottomCenter,
               children: [
+                GestureDetector(
+                  onTap: () {
+                    FocusManager.instance.primaryFocus?.unfocus();
+                  },
+                  child: Container(
+                    margin: EdgeInsets.only(
+                      bottom: 70.h,
+                    ),
+                    child: CustomScrollView(
+                      controller: _chatController.appScrollController,
+                      reverse: true,
+                      shrinkWrap: true,
+                      slivers: [
+                        SliverPadding(
+                          padding: EdgeInsets.symmetric(
+                            horizontal: 25.w,
+                          ),
+                          sliver: SliverList(
+                            delegate:
+                                SliverChildBuilderDelegate((context, index) {
+                              return chatWidget(state.msgcontentList[index]);
+                            }, childCount: state.msgcontentList.length),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 Positioned(
                   bottom: 0.h,
                   child: Container(
@@ -41,7 +86,7 @@ class _ChatPageState extends State<ChatPage> {
                     padding: EdgeInsets.only(
                       left: 20.w,
                       right: 20.w,
-                      bottom: 10.h,
+                      bottom: 0.h,
                       top: 10.h,
                     ),
                     child: Row(
@@ -72,6 +117,8 @@ class _ChatPageState extends State<ChatPage> {
                                     'Message...',
                                     "none",
                                     maxLines: null,
+                                    controller:
+                                        _chatController.textEditingController,
                                     (value) {}),
                               ),
                               GestureDetector(
@@ -91,7 +138,9 @@ class _ChatPageState extends State<ChatPage> {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            _chatController.sendMessage();
+                          },
                           child: Container(
                             width: 40.w,
                             height: 40.h,

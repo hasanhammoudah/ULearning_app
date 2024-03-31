@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:ulearning_app/common/values/colors.dart';
 import 'package:ulearning_app/pages/home/home_page.dart';
+import 'package:ulearning_app/pages/messages/message/cubit/message_cubit.dart';
+import 'package:ulearning_app/pages/messages/message/message.dart';
 import 'package:ulearning_app/pages/profile/profile_page.dart';
 import 'package:ulearning_app/pages/search/bloc/search_bloc.dart';
 import 'package:ulearning_app/pages/search/search.dart';
@@ -17,8 +19,9 @@ Widget buildPage(int index) {
     const Center(
       child: Text('Course'),
     ),
-    const Center(
-      child: Text('Chat'),
+    BlocProvider<MessageCubit>(
+      create: (context) => MessageCubit(),
+      child: const Message(),
     ),
     const ProfilePage(),
   ];
