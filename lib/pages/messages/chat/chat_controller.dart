@@ -11,12 +11,16 @@ import 'package:ulearning_app/pages/messages/chat/bloc/chat_event.dart';
 
 class ChatController {
   late BuildContext context;
+
   ChatController({required this.context});
+
   TextEditingController textEditingController = TextEditingController();
   ScrollController appScrollController = ScrollController();
 
+  //get user profile
   UserItem? userProfile = Global.storageService.getUserProfile();
 
+  //get databse instance
   final db = FirebaseFirestore.instance;
   late var docId;
   late var listener;
@@ -24,14 +28,42 @@ class ChatController {
 
   void init() {
     final data = ModalRoute.of(context)!.settings.arguments as Map;
+    //this is the id between two users and unique
     docId = data["doc_id"];
-    // print("--------my doc id ${docId}-----");
 
+    _clearMsgNum(docId);
     _chatSnapShots();
+  }
+
+  _clearMsgNum(String docId) async {
+    var messageRes = await db
+        .collection('message')
+        .doc(docId)
+        .withConverter(
+        fromFirestore: Msg.fromFirestore,
+        toFirestore: (Msg msg, options) => msg.toFirestore())
+        .get();
+    if(messageRes.data()!=null){
+      var item = messageRes.data()!;
+      int to_msg_num = item.to_msg_num==null?0:item.to_msg_num!;
+      int from_msg_num = item.from_msg_num==null?0:item.from_msg_num!;
+      if(item.from_token==userProfile!.token){
+        to_msg_num=0;
+      }else{
+        from_msg_num=0;
+      }
+
+      await db.collection("message").doc(docId).update({
+        "to_msg_num":to_msg_num,
+        "from_msg_num":from_msg_num
+      });
+    }
   }
 
   void dispose() {
     textEditingController.dispose();
+    appScrollController.dispose();
+    _clearMsgNum(docId);
   }
 
   Future<void> _chatSnapShots() async {
@@ -46,64 +78,75 @@ class ChatController {
             toFirestore: (Msgcontent msg, options) => msg.toFirestore())
         .orderBy("addtime", descending: true)
         .limit(15);
-
-    //  print(jsonEncode(Message));
-    listener = messages.snapshots().listen(
-      (event) {
-        // print("${event.docs[0].data().content}");
-        List<Msgcontent> tempMsgList = <Msgcontent>[];
-        for (var change in event.docChanges) {
-          switch (change.type) {
-            case DocumentChangeType.added:
+    //not printable
+    //print(jsonEncode(messages));
+    //the below method gets called when you come to this chat page or open it
+    //or second messages from here
+    listener = messages.snapshots().listen((event) {
+      List<Msgcontent> tempMsgList = <Msgcontent>[];
+      for (var change in event.docChanges) {
+        switch (change.type) {
+          case DocumentChangeType.added:
+            if (kDebugMode) {
+              // print('added ---: ${change.doc.data()}');
+            }
+            if (change.doc.data() != null) {
+              tempMsgList.add(change.doc.data()!);
               if (kDebugMode) {
-                print('added ---: ${change.doc.data()}');
+                //  print('added');
               }
-              if (change.doc.data() != null) {
-                tempMsgList.add(change.doc.data()!);
-                if (kDebugMode) {
-                  print('added');
-                }
-              }
-              break;
-            case DocumentChangeType.modified:
+            }
+            break;
+          case DocumentChangeType.modified:
             // TODO: Handle this case.
-            case DocumentChangeType.removed:
+            break;
+          case DocumentChangeType.removed:
             // TODO: Handle this case.
-          }
+            break;
         }
+      }
+      //the zero index contains the last message
+      if (kDebugMode) {
+        //  print('the lenght of the chat is ${tempMsgList[0].content}');
+      }
+      //the bottom one comes to the top
+      for (var element in tempMsgList.reversed) {
         if (kDebugMode) {
-          print('the lenght of the chat is ${tempMsgList[0].content}');
+          //print('${element.content}');
         }
-
-        for (var element in tempMsgList.reversed) {
-          chatContext.read<ChatBloc>().add(TriggerMsgContentList(element));
-        }
-      },
-      onError: (error) => print('Listen failed $error'),
-    );
+        //the last (message) one will stay at the top on the UI because we reversed
+        chatContext.read<ChatBloc>().add(TriggerMsgContentList(element));
+      }
+    }, onError: (error) => print('Listen failed $error'));
+    //offset starts from 0
+    //maxScrollExtent starts from 0 until you start scrolling
 
     appScrollController.addListener(() {
-      if (kDebugMode) {
-        print('offset----${appScrollController.offset}---------');
-      }
-      if (kDebugMode) {
-        print(
-            'maxScrollExtent----${appScrollController.position.maxScrollExtent}---------');
-      }
-
+      print('offset---${appScrollController.offset}---');
+      print('maxScrollExtent---${appScrollController.position.maxScrollExtent}---');
+      //offset starts as you scroll
+      //offset tells you how much you scrolled
       if ((appScrollController.offset) >
           (appScrollController.position.maxScrollExtent)) {
         if (isLoadMore) {
           chatContext.read<ChatBloc>().add(const TriggerLoadMsgData(true));
-
+          //trigger loading icon on
+          //set isLoadMore to false
           isLoadMore = false;
-          print('loading............');
+          print('loading....');
+          //load server data
           _asyncLoadMoreData();
+          //trigger loading icon off
           chatContext.read<ChatBloc>().add(const TriggerLoadMsgData(false));
         }
       }
     });
   }
+
+  // Hi
+  // hello
+  // .,...
+  //.....
 
   Future<void> _asyncLoadMoreData() async {
     var state = context.read<ChatBloc>().state;
@@ -115,20 +158,22 @@ class ChatController {
             fromFirestore: Msgcontent.fromFirestore,
             toFirestore: (Msgcontent msg, options) => msg.toFirestore())
         .orderBy("addtime", descending: true)
-        .where("addtime", isLessThan: state.msgcontentList.last.addtime)
-        .limit(10)
+        .where("addtime", isLessThan: state.msgcontentList.last.addtime) // 13,...10
+        .limit(15)
         .get();
 
-    if (moreMessages.docs.isNotEmpty) {
+    if(moreMessages.docs.isNotEmpty){
       moreMessages.docs.forEach((element) {
-        var data = element.data();
+        //element.data() refers to a document in msglist
+        var  data = element.data();
         context.read<ChatBloc>().add(TriggerAddMsgContent(data));
       });
 
-      //TODO read more about this and read ** Encode and decode for dart
+
       SchedulerBinding.instance.addPostFrameCallback((_) {
         isLoadMore = true;
       });
+
     }
   }
 
@@ -136,14 +181,15 @@ class ChatController {
     if (textEditingController.text.isEmpty) {
       toastInfo(msg: "You can not send an empty message");
     } else {
+      print('---my sent messages ${textEditingController.text.toString()}---');
       String sendContent = textEditingController.text.trim();
       textEditingController.clear();
+      //create a message object
       final content = Msgcontent(
-        token: userProfile!.token,
-        content: sendContent,
-        type: "text",
-        addtime: Timestamp.now(),
-      );
+          token: userProfile!.token,
+          content: sendContent,
+          type: "text",
+          addtime: Timestamp.now());
 
       await db
           .collection("message")
@@ -154,26 +200,27 @@ class ChatController {
               toFirestore: (Msgcontent msg, options) => msg.toFirestore())
           .add(content)
           .then((DocumentReference doc) {
-        print("----------after adding ${docId}------------");
+        print('---after adding ${doc.id}---');
       });
 
       var messageRes = await db
           .collection("message")
           .doc(docId)
           .withConverter(
-            fromFirestore: Msg.fromFirestore,
-            toFirestore: (Msg msg, options) => msg.toFirestore(),
-          )
+              fromFirestore: Msg.fromFirestore,
+              toFirestore: (Msg msg, options) => msg.toFirestore())
           .get();
 
-      if (messageRes.data()! != null) {
+      if (messageRes.data() != null) {
         var item = messageRes.data()!;
 
         int to_msg_num = item.to_msg_num == null ? 0 : item.to_msg_num!;
         int from_msg_num = item.from_msg_num == null ? 0 : item.from_msg_num!;
         if (item.from_token == userProfile!.token) {
+          //sender message count
           from_msg_num = from_msg_num + 1;
         } else {
+          // the other person's message count
           to_msg_num = to_msg_num + 1;
         }
 

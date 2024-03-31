@@ -23,7 +23,6 @@ class _ChatPageState extends State<ChatPage> {
   @override
   void didChangeDependencies() {
     _chatController = ChatController(context: context);
- 
       _chatController.init();
    
     super.didChangeDependencies();

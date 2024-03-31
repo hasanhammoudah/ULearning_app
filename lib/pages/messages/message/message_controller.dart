@@ -2,8 +2,11 @@ import 'dart:async';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:ulearning_app/common/entities/entities.dart';
+import 'package:ulearning_app/common/routes/names.dart';
 import 'package:ulearning_app/global.dart';
+import 'package:ulearning_app/pages/messages/message/cubit/message_cubit.dart';
 
 class MessagesController {
   late BuildContext context;
@@ -15,6 +18,22 @@ class MessagesController {
 
   void init() {
     _snapShots();
+  }
+
+  Future<void> goChat(Message item) async {
+    var nav = Navigator.of(context);
+    if (item.doc_id != null) {
+      if (listener1 != null && listener2 != null) {
+        await listener1?.cancel();
+        await listener2?.cancel();
+      }
+    }
+    nav.pushNamed(AppRoutes.CHAT, arguments: {
+      "doc_id": item.doc_id,
+      "to_token": item.token,
+      "to_avatar": item.avatar,
+      "to_online": item.online,
+    }).then((value) => _snapShots());
   }
 
   void _snapShots() {
@@ -44,7 +63,7 @@ class MessagesController {
   }
 
   _asyncLoadMsgData() async {
-    var msgContext = context;
+    var msgContext = context.read<MessageCubit>();
     final fromMessageRef = await db
         .collection("message")
         .withConverter(
@@ -78,7 +97,11 @@ class MessagesController {
     messageList.sort((a, b) {
       if (b.last_time == null) return 0;
       if (a.last_time == null) return 0;
+      return b.last_time!.compareTo(a.last_time!);
     });
+
+    msgContext.messageChanged(messageList);
+    msgContext.loadStatusChanged(false);
   }
 
   Future<List<Message>> _addMessage(
@@ -97,11 +120,13 @@ class MessagesController {
         message.avatar = item.to_avatar;
         message.msg_num = item.to_msg_num ?? 0;
         message.online = item.to_online;
+        message.token = item.to_token;
       } else {
         message.name = item.from_name;
         message.avatar = item.from_avatar;
         message.msg_num = item.from_msg_num ?? 0;
         message.online = item.from_online;
+        message.token = item.from_token;
       }
 
       messageList.add(message);
