@@ -30,6 +30,10 @@ Welcome to uLearning_app, a comprehensive course purchasing application designed
 - video_player: ^2.8.3
 - webview_flutter: ^3.0.1
 
+## Preview Video
+
+Check out the preview video of uLearning_app [here](link_to_video_file).
+
 ## Download APK
 
 You can download the latest version of the uLearning_app APK [here](link_to_apk_file).
@@ -38,3 +42,4 @@ You can download the latest version of the uLearning_app APK [here](link_to_apk_
 ![Screenshot 2](https://via.placeholder.com/600x400)
 ![Screenshot 3](https://via.placeholder.com/600x400)
 
+*Note: Replace the placeholder images with actual screenshots of your application.*
